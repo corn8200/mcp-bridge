@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Runtime config and secrets
+.config/
+.env
+.env.local
+oauth-state.json
+tools-cache.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
