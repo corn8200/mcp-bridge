@@ -494,8 +494,13 @@ export class UpstreamBridge {
             },
           });
           transport.stderr?.on("data", (chunk) => {
-            const text = String(chunk).trim();
-            if (text) {
+            for (const text of String(chunk)
+              .split(/\r?\n/)
+              .map((line) => line.trim())
+              .filter(Boolean)) {
+              if (/^Processing request of type \w+$/.test(text)) {
+                continue;
+              }
               options.log("warn", "sentinel stderr", { text });
             }
           });
