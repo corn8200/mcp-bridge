@@ -3,7 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Persistent local MCP bridge for Overseer and Sentinel.",
+  "description": "OAuth-aware local bridge for Model Context Protocol servers. Warm tool cache, reconnect with backoff, CORS for Claude/ChatGPT origins.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/corn8200/mcp-bridge"
+  },
+  "homepage": "https://github.com/corn8200/mcp-bridge",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "oauth",
+    "bridge",
+    "stdio",
+    "claude",
+    "anthropic",
+    "chatgpt"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc --noEmit -p tsconfig.json",
