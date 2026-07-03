@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { mkdir, readFile, rename, writeFile, chmod } from "node:fs/promises";
-import { dirname } from "node:path";
+import { dirname, join } from "node:path";
 
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import {
@@ -636,7 +636,9 @@ export async function runOAuthBootstrap(options: {
 
 async function readOwnerPassword(opRef: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const child = spawn("op", ["read", opRef], { stdio: ["ignore", "pipe", "pipe"] });
+    const runner = join(process.env.HOME ?? "", ".config", "op-service-account-run.sh");
+    const command = runner && existsSync(runner) ? runner : "op";
+    const child = spawn(command, ["read", opRef], { stdio: ["ignore", "pipe", "pipe"] });
     const timer = setTimeout(() => {
       child.kill("SIGTERM");
       reject(new Error("op read timed out"));
